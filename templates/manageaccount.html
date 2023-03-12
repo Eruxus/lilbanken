@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ customer.Surname }}, {{ active_account.Id }}
+{% endblock %}
+
+{% block content %}
+<div class="info-div">
+    <p>Created on {{ active_account.Created }} owned by {{ customer.GivenName }} {{ customer.Surname }}</p>
+    <h1>Account Identifier: {{ active_account.Id }}</h1>
+    <p>Type: {{ active_account.AccountType }}</p>
+    <p>Current Balance: {{ active_account.Balance }}</p>
+    <div class="customer-nav">
+        <tr>
+            <td>
+                <a href="/customer/{{ customer.Id }}/{{ active_account.Id }}/deposit" class="btn">Deposit</a>
+            </td>
+            <td>
+                <a href="/customer/{{ customer.Id }}/{{ active_account.Id }}/withdrawal" class="btn">Withdrawal</a>
+            </td>
+            <td>
+                <a href="/customer/{{ customer.Id }}/{{ active_account.Id }}/transfer" class="btn">Transfer</a>
+            </td>
+        </tr>
+    </div>
+    <h2>History</h2>
+</div>
+<table cellspacing="2" id="transaction-history-table" class="history-table">
+    <thead>
+        <td>
+            <b>Transaction ID</b>
+        </td>
+        <td>
+            <b>Type</b>
+        </td>
+        <td>
+            <b>Operation</b>
+        </td>
+        <td>
+            <b>Date</b>
+        </td>
+        <td>
+            <b>Amount</b>
+        </td>
+        <td>
+            <b>New Balance</b>
+        </td>
+    </thead>
+    <tbody>
+
+    </tbody>
+
+    <script>
+        pageNo = 1;
+        function fetchMore() {
+            fetch("/api/transactions/{{ active_account.Id }}?page=" + pageNo)
+                .then((response) => response.json())
+                .then((json) => {
+                        pageNo = pageNo + 1;
+                        json.forEach(tableElements);
+                    }
+                );
+        }
+    
+        function tableElements(element) {
+                document.querySelector('#transaction-history-table tbody').innerHTML +=
+                    `<tr>
+            <td>${element.Id}</td>
+            <td>${element.Type}</td>
+            <td>${element.Operation}</td>
+            <td>${element.Date}</td>
+            <td>${element.Amount}</td>
+            <td>${element.NewBalance}</td>
+        </tr>`;
+            }
+            document.addEventListener("DOMContentLoaded", function () {
+                fetchMore();
+            });
+    
+    </script>
+</table>
+<div class="history-button-div">
+    <a class="btn" href="javascript:fetchMore()">View more</a>
+</div>
+
+{% endblock %}

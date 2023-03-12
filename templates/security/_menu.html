@@ -1,0 +1,5 @@
+{% if security.recoverable %}
+  <div class="history-table">
+    <a href="{{ url_for_security('forgot_password') }}" class="btn">{{ _fsdomain('Forgot password') }}</a><br/>
+  </div>
+{% endif %}

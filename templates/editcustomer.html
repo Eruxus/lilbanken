@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}
+Edit Customer Form
+{% endblock %}
+
+{% block content %}
+    {% for field, errors in form.errors.items() %}
+    {{ form[field].label }}: {{ ', '.join(errors) }}
+    </br>
+    {% endfor %}
+
+    <form method="post">
+    {{ form.csrf_token }}
+    <div>
+        <h2>Information about new customer</h2>
+        <div>
+          <div>
+            {{ form.name(class="input", placeholder="First Name")  }}
+          </div>
+          <div>
+            {{ form.surname(class="input", placeholder="Last Name")  }}
+          </div>
+        </div>
+        <div>
+          <div>
+            {{ form.address(class="input", placeholder="Street Address")  }}
+          </div>
+          <div>
+            {{ form.city(class="input", placeholder="City")  }}
+          </div>
+          <div>
+            {{ form.zipcode(class="input", placeholder="Zip Code")  }}
+          </div>
+        </div>
+        <div>
+          <div>
+            {{ form.country(class="input", placeholder="Country")  }}
+          </div>
+          <div>
+            <label for="countryCode">Country Code</label>
+            {{ form.countryCode(class="input")  }}
+          </div>
+          <div>
+            {{ form.mail(class="input", placeholder="E-mail")  }}
+          </div>
+        </div>
+        <div>
+            <label for="birthday">Birthday</label>
+            {{ form.birthday(class="input")  }}
+        </div>
+        <div>
+            <div>
+              {{ form.nationalid(class="input", placeholder="National ID")  }}
+            <div>
+              <label for="telephoneCode">Telephone Code</label>
+              {{ form.telephoneCode(class="input")  }}
+            </div>
+            </div>
+                {{ form.phonenumber(class="input", placeholder="Phone Number")  }}
+
+          </div>
+
+        <div class="history-table">
+            <input class="btn" type="submit" value="Confirm">
+            <a href="/" class="btn">Cancel</a>
+        </div>
+      </div>
+    </form>
+
+{% endblock %}

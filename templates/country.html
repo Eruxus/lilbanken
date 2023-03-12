@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}
+Top 10 for {{ country }}
+{% endblock %}
+
+{% block content %}
+
+<h2>The 10 richest customers in {{ country }}</h2>
+<table cellspacing="10">
+    <tr>
+        <td>
+            <b>Name</b>
+        </td>
+        <td>
+            <b>Networth</b>
+        </td>
+    </tr>
+    
+    {% for x, y in top10 %}
+    <tr>
+        <td>
+            {{ x }}
+        </td>
+        <td>
+            {{ y }}
+        </td>
+    </tr>
+{% endfor %}
+{% endblock %}

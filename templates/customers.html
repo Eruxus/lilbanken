@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}
+All Customers
+{% endblock %}
+
+{% block content %}
+
+<div>
+    <form method="get">
+        <input type="text" placeholder="Search" name="q" value="{{ q }}" class="input">
+        <input class="btn" type="submit" value="Search">
+    </form>
+</div>
+    <table>
+        <tr>
+            <td>
+                <b>Name</b>
+                <a href="/customers?sortColumn=name&sortOrder=asc&q={{ q }}"><i class='bx bxs-up-arrow-alt'></i></a>
+                <a href="/customers?sortColumn=name&sortOrder=desc&q={{ q }}"><i class='bx bxs-down-arrow-alt'></i></a>
+            </td>
+            <td>
+                <b>City</b>
+                <a href="/customers?sortColumn=city&sortOrder=asc&q={{ q }}"><i class='bx bxs-up-arrow-alt'></i></a>
+                <a href="/customers?sortColumn=city&sortOrder=desc&q={{ q }}"><i class='bx bxs-down-arrow-alt'></i></a>
+            </td>
+        </tr>
+    {% for c in customers  %}
+        <tr>
+            <td>
+                {{ c.GivenName }}
+            </td>
+            <td>
+                {{ c.City }}
+            </td>
+            <td>
+                <a href="/customer/{{ c.Id }}" class="btn">More info</a>
+            </td>
+        </tr>
+    
+    {% endfor %}
+
+</table>
+<div class="customers-nav">
+    {% if has_prev %}
+    <a class="btn" href="/customers?page={{ page - 1 }}&sortColumn={{ sortColumn }}&sortOrder={{ sortOrder }}&q={{ q }}">Prev</a>
+    {% else %}
+    <a class="btn2" href="/customers?page={{ page }}&sortColumn={{ sortColumn }}&sortOrder={{ sortOrder }}&q={{ q }}">Prev</a>
+    {% endif %}
+
+    {% if has_next %}
+    <a class="btn" href="/customers?page={{ page + 1 }}&sortColumn={{ sortColumn }}&sortOrder={{ sortOrder }}&q={{ q }}">Next</a>
+    {% else %}
+    <a class="btn2" href="/customers?page={{ page }}&sortColumn={{ sortColumn }}&sortOrder={{ sortOrder }}&q={{ q }}">Next</a>
+    {% endif %}
+</div>
+You are on page {{ page }} out of {{ pages }}
+{% endblock %}

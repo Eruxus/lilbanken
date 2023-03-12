@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}" asp-append-version="true">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css'  rel='stylesheet'>
+    <title>
+        {% block title %}
+        {% endblock %}
+       </title>
+</head>
+<body>
+    <div class="user-info">
+        {% if current_user.is_authenticated %}
+        <p>{{ current_user.email }}</p>
+        <a href="/logout" class="btn">Log Out</a>
+        {% endif %}
+    </div>
+    <div class="side-menu-box">
+        <div class="history-table">
+            <a href="/" class="button"><span class="button-span">Start</span></a>
+        </div>
+        {% if current_user.is_authenticated %}
+        <h2>Customers</h2>
+        <div class="history-table">
+            <a href="/customers" class="button"><span class="button-span">Browse</span></a>
+        </div>
+        <div class="history-table">
+            <a href="/newcustomer" class="button"><span class="button-span">New</span></a>
+        </div>
+        {% else %}
+        <div class="history-table">
+            <a href="/login" class="button"><span class="button-span">Login</span></a>
+        </div>
+        {% endif %}
+        {% if current_user.has_role("Admin") %}
+        <h2>Users</h2>
+        <div class="history-table">
+            <a href="/users" class="button"><span class="button-span">Manage</span></a>
+        </div>
+        {% endif %}
+    </div>
+
+        <header class="header">
+            <h1>LilBanken</h1>
+        </header>
+        <main>
+            <div class="content">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="flashed_message_box">
+                        {% for message in messages %}
+                        <p>{{ message }}</p>
+                      {% endfor %}
+                    </div>
+                {% endif %}
+                {% endwith %}
+                {% block content %}
+                {% endblock %}
+            </div>
+        </main>
+     
+</body>
+<footer class="footer">
+    {% block footer %}
+        <div class="footer-content">&copy; 2023 LilBanken</div>
+        <div class="footer-content">Made with love by the community</div>
+    {% endblock %}
+</footer> 
+</html>

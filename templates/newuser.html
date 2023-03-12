@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}
+New User Form
+{% endblock %}
+
+{% block content %}
+    {% for field, errors in form.errors.items() %}
+    {{ ', '.join(errors) }}
+    </br>
+    {% endfor %}
+
+    <form method="post">
+    {{ form.csrf_token }}
+
+    <div>
+        <h2>Information about new user</h2>
+        <div>
+          <div>
+            {{ form.mail(class="input", placeholder="E-mail")  }}
+          </div>
+          <div>
+            {{ form.role(class="input", placeholder="Role")  }}
+          </div>
+        </div>
+        <div>
+          <div>
+            {{ form.pw(class="input", placeholder="Password")  }}
+          </div>
+          <div>
+            {{ form.pw_confirm(class="input", placeholder="Repeat Password")  }}
+          </div>
+        <div class="history-table">
+            <input class="btn" type="submit" value="Register">
+            <a href="/users" class="btn">Cancel</a>
+        </div>
+      </div>
+    </form>
+
+{% endblock %}

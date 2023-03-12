@@ -1,0 +1,174 @@
+html *  {
+   font-family: DejaVu Sans, Verdana, sans-serif !important;
+}
+
+body {
+    margin-top: 0px;
+}
+
+td  {
+    padding: 4px;
+}
+
+.header {
+    position: fixed;
+    background-color: white;
+    width: 100%;
+    display: block;
+    text-align: center;
+    border-bottom: 1px solid darkred;
+    box-shadow: 0 1px 0px hsla(0,0%,0%,0.05), 0 1px 0px hsla(0, 0%, 0%, 0.05), 0 2px 0px hsla(0, 0%, 0%, 0.05);
+}
+
+.info-div {
+    margin-bottom: 20px;
+    width: 60%;
+    border-bottom: 1px solid darkred;
+    box-shadow: 0 1px 0px hsla(0,0%,0%,0.05), 0 1px 0px hsla(0, 0%, 0%, 0.05), 0 2px 0px hsla(0, 0%, 0%, 0.05);
+}
+
+.btn {
+    color: white;
+    background: darkred;
+    padding: 0.25em 0.75em;
+    font-size: 1em;
+    font-weight: 400;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background: rgb(170, 0, 0);
+}
+
+.btn2 {
+    color: white;
+    background: grey;
+    padding: 0.25em 0.75em;
+    font-size: 1em;
+    font-weight: 400;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.side-menu-box {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 10px;
+    overflow-x: hidden;
+    padding-top: 110px;
+}
+
+.flashed_message_box {
+    width: 20%;
+    position: fixed;
+    z-index: 1;
+    top: 82px;
+    left: 80%;
+    border-left: 1px solid darkred;
+    border-bottom: 1px solid darkred;
+    box-shadow: 0 1px 0px hsla(0,0%,0%,0.05), 0 1px 0px hsla(0, 0%, 0%, 0.05), 0 2px 0px hsla(0, 0%, 0%, 0.05);
+}
+
+.input {
+    margin-top: 5px;
+    height: 30px;
+    padding: 0px 15px;
+    border: 1px solid #E4E7ED;
+    background-color: #FFF;
+  }
+
+.user-info {
+    display: grid;
+    place-items: center;
+    position: fixed;
+    z-index: 1;
+    left: 85%;
+}
+
+.info-box {
+    padding: 10px;
+    border: 2px solid darkred;
+    margin: 10px;
+    font-size: 20px;
+    box-shadow: 0 1px 0px hsla(0,0%,0%,0.05), 0 1px 0px hsla(0, 0%, 0%, 0.05), 0 2px 0px hsla(0, 0%, 0%, 0.05);
+}
+
+.customers-nav {
+    padding: 8px;
+    place-content: space-evenly;
+    display: flex;
+    width: 250px;
+}
+
+.content {
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding-top: 100px;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    text-align: left;
+    bottom: 0;
+    width: 100%;
+    background: darkred;
+    padding: 5px;
+}
+
+
+.footer-content {
+    width: 75%;
+    margin: auto;
+    color: white;
+}
+
+.history-table {
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.history-button-div {
+    padding-bottom: 80px;
+}
+
+.button {
+    background-image: linear-gradient(to right, #000000 0%, #ff0000 100%);
+    border-radius: 40px;
+    box-sizing: border-box;
+    color: white;
+    display: block;
+    height: 50px;
+    font-size: 1.2em;
+    padding: 4px;
+    position: relative;
+    text-decoration: none;
+    width: 8em;
+    z-index: 2;
+  }
+  
+  .button:hover {
+    color: #fff;
+  }
+  
+  .button .button-span {
+    align-items: center;
+    background: rgb(144, 0, 0);
+    border-radius: 40px;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    transition: background 0.5s ease;
+    width: 100%;
+  }
+  
+  .button:hover .button-span {
+    background: transparent;
+  }

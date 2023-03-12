@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}
+Withdraw for {{ active_account.Id }}
+{% endblock %}
+
+{% block content %}
+    {% for field, errors in form.errors.items() %}
+    {{ ', '.join(errors) }}
+    </br>
+    {% endfor %}
+
+    <form method="post">
+    {{ form.csrf_token }}
+
+    <div>
+        <h2>Withdrawal</h2>
+        <p>Active account ID: {{ active_account.Id }}</p>
+        <p>Current balance: {{ active_account.Balance }}</p>
+        <div>
+          <div>
+            <label for="withdrawalAmount">Amount: </label>
+            {{ form.withdrawalAmount(class="input")  }}
+          </div>
+        </div>
+        <div class="history-table">
+            <input class="btn" type="submit" value="Withdraw">
+            <a href="/customer/{{ customer.Id }}/{{ active_account.Id }}" class="btn">Cancel</a>
+        </div>
+    </div>
+    </form>
+
+{% endblock %}

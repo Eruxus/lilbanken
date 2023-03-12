@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}
+User Management
+{% endblock %}
+
+{% block content %}
+<div class="info-div">
+    <div class="customer-nav">
+        <h1>User Management Page</h1>
+        <p>Here you can create new employee account or update their role/mail.</p>
+        <p>Password can only be changed by the user himself via forgot password.</p>
+        <tr>
+            <td>
+                <a href="/newuser" class="btn">New User</a>
+            </td>
+    </div>
+    <h2>User List</h2>
+</div>
+<table cellspacing="2" id="transaction-history-table" class="history-table">
+    <thead>
+        <td>
+            <b>E-mail</b>
+        </td>
+        <td>
+            <b>Role</b>
+        </td>
+        <td>
+            <b>Active</b>
+        </td>
+    </thead>
+    <tbody>
+
+    </tbody>
+
+    <script>
+        pageNo = 1;
+        function fetchMore() {
+            fetch("/api/users_list?page=" + pageNo)
+                .then((response) => response.json())
+                .then((json) => {
+                        pageNo = pageNo + 1;
+                        json.forEach(tableElements);
+                    }
+                );
+        }
+    
+        function tableElements(element) {
+            var activate_button = ""
+            if (element.Active === false) {
+                activate_button = `<td><a href="/activate_user/${element.id}" class="btn">Activate</a></td>
+                </tr>`;
+                }
+            else {
+                activate_button = `<td><a href="/deactivate_user/${element.id}" class="btn">Deactivate</a></td>
+                </tr>`;
+                }    
+                document.querySelector('#transaction-history-table tbody').innerHTML +=
+                    `<tr>
+                    <td>${element.Email}</td>
+                    <td>${element.Role}</td>
+                    <td>${element.Active}</td>
+                    <td><a href="/user/${element.id}" class="btn">Edit</a></td>` + activate_button;
+            }
+            document.addEventListener("DOMContentLoaded", function () {
+                fetchMore();
+            });
+    
+    </script>
+</table>
+<div class="history-button-div">
+    <a class="btn" href="javascript:fetchMore()">View more</a>
+</div>
+
+{% endblock %}

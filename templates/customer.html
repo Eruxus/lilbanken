@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ customer.Surname }}, {{ customer.GivenName }}
+{% endblock %}
+
+{% block content %}
+<div class="info-div">
+    
+<h1>{{ customer.Surname }} {{ customer.GivenName }} <small>{{ customer.CountryCode }}</small></h1>
+<a href="/customer/{{ customer.Id }}/edit" class="btn">Edit</a>
+<b>Personal Information</b>
+<p>National ID: {{ customer.NationalId }}</p>
+<p>Birthday: {{ customer.Birthday.date() }}</p>
+<p>Contact Phone: {{ customer.Telephone}}</p>
+<p>E-mail: {{ customer.EmailAddress }}</p>
+<p>Address:</p>
+<p>{{ customer.Streetaddress }}</p>
+<p>{{ customer.Zipcode }} {{ customer.City }}</p>
+<p>{{ customer.Country }}</p>
+<h2>Accounts</h2>
+</div>
+<div>
+    <table cellspacing="10">
+        <tr>
+            <td>
+                Creation date
+            </td>
+            <td>
+                Account Type
+            </td>
+            <td>
+                Balance
+            </td>
+        </tr>
+        {% set ns = namespace(total = 0) %}
+        {% for acc in customer_accounts  %}
+            <tr>
+                <td>
+                    {{ acc.Created.date() }}
+                </td>
+                <td>
+                    {{ acc.AccountType }}
+                </td>
+                <td>
+                    {{ acc.Balance }}
+                </td>
+                <td>
+                    <a href="/customer/{{ customer.Id }}/{{ acc.Id }}" class="btn">Manage</a>
+                </td>
+            </tr>
+            {% set ns.total = ns.total + acc.Balance %}
+        {% endfor %}
+    </table>
+</div>
+<b>Total Balance: {{ ns.total }}</b>
+<div class="history-table">
+    <a href="/customer/{{ customer.Id }}/addacc" class="btn">New Account</a>
+</div>
+{% endblock %}

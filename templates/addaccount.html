@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}
+Add Account Page
+{% endblock %}
+
+{% block content %}
+    {% for field, errors in form.errors.items() %}
+    {{ form[field].label }}: {{ ', '.join(errors) }}
+    </br>
+    {% endfor %}
+
+    <form method="post">
+    {{ form.csrf_token }}
+
+    <div>
+        <h2>Choose type of account to be opened</h2>
+        <p>Opening account for {{ customer.GivenName }} {{ customer.Surname }}</p>
+        <div>
+          <div>
+            <label for="AccountType">Account Type: </label>
+            {{ form.AccountType(class="input")  }}
+          </div>
+        </div>
+        <div class="history-table">
+            <input class="btn" type="submit" value="Open">
+            <a href="/customer/{{ customer.Id }}" class="btn">Cancel</a>
+        </div>
+    </div>
+    </form>
+
+{% endblock %}

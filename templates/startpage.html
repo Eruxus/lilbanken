@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}
+Welcome to LilBanken
+{% endblock %}
+
+{% block content %}
+<h1>LilBanken Management Startpage</h1>
+<p>Here are some statistics of our bank.</p>
+<div class="customers-nav">
+    <tr>
+        <td>
+            <div class="info-box">
+                Customers: {{ count_customers }}
+            </div>
+        </td>
+        <td>
+            <div class="info-box">
+                Accounts: {{ count_accounts }}
+            </div>
+        </td>
+        <td>
+            <div class="info-box">
+                Saldo: {{ sum_accounts }}
+            </div>
+        </td>
+    </tr>
+</div>
+<h2>The three richest countries</h2>
+<table cellspacing="10">
+    <tr>
+        <td>
+            <b>Country</b>
+        </td>
+        <td>
+            <b>Networth</b>
+        </td>
+        <td>
+            <b>Richest List</b>
+        </td>
+    </tr>
+    
+    {% for x, y in top3 %}
+    <tr>
+        <td>
+            {{ x }}
+        </td>
+        <td>
+            {{ y }}
+        </td>
+        <td>
+            <a class="btn" href="/country/{{ x }}">Top 10</a>
+        </td>
+    </tr>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}
+Deposit for {{ active_account.Id }}
+{% endblock %}
+
+{% block content %}
+    {% for field, errors in form.errors.items() %}
+    {{ ', '.join(errors) }}
+    </br>
+    {% endfor %}
+
+    <form method="post">
+    {{ form.csrf_token }}
+
+    <div>
+        <h2>Deposit</h2>
+        <p>Active account ID: {{ active_account.Id }}</p>
+        <p>Current balance: {{ active_account.Balance }}</p>
+        <div>
+          <div>
+            <label for="depositAmount">Amount: </label>
+            {{ form.depositAmount(class="input")  }}
+          </div>
+        </div>
+        <div class="history-table">
+            <input class="btn" type="submit" value="Deposit">
+            <a href="/customer/{{ customer.Id }}/{{ active_account.Id }}" class="btn">Cancel</a>
+        </div>
+    </div>
+    </form>
+
+{% endblock %}
